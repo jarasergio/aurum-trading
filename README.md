@@ -136,7 +136,6 @@ Rama principal: main.
 
 La arquitectura del backend está organizada por responsabilidades, separando API, configuración, acceso a datos, modelos, esquemas y servicios.
 
-text
 aurum-trading/
 │
 ├── .env
@@ -190,6 +189,7 @@ aurum-trading/
 ├── scripts/
 └── .github/
     └── workflows/
+
 
 
 La estructura mostrada recoge los componentes principales y las carpetas previstas para el crecimiento del proyecto. Los módulos todavía no implementados se incorporarán progresivamente.
@@ -443,27 +443,23 @@ Gestión de órdenes.
 Sincronización de posiciones.
 Controles de seguridad.
 Pruebas antes de cualquier ejecución real.
+
 11. Control de versiones
 
 El proyecto utiliza Git y GitHub.
 
 Repositorio remoto:
 
-text
 git@github.com:jarasergio/aurum-trading.git
-
 
 Rama principal:
 
-text
 main
-
 
 Se utilizarán commits pequeños y descriptivos.
 
 Ejemplos:
 
-text
 feat: add market data module
 feat: implement historical candles
 fix: correct instrument validation
@@ -474,13 +470,11 @@ docs: update project documentation
 
 Antes de cada commit se recomienda comprobar:
 
-bash
 git status
 
 
 Y después de los cambios:
 
-bash
 git add .
 git commit -m "descriptive commit message"
 git push origin main
@@ -495,19 +489,20 @@ Bases de datos locales.
 Datos históricos voluminosos.
 Credenciales.
 Archivos temporales.
+
 12. Documentación del proyecto
 
 La documentación deberá evolucionar junto con el código.
 
 Se contempla incorporar:
 
-text
 docs/
 ├── architecture.md
 ├── risk-management.md
 ├── market-data.md
 ├── database.md
 └── development-guide.md
+
 
 
 Cada módulo importante deberá documentar:
@@ -520,6 +515,7 @@ Endpoints.
 Configuración.
 Pruebas.
 Decisiones técnicas.
+
 13. Estado de seguridad del proyecto
 
 Aurum Trading se encuentra actualmente en fase de desarrollo.
