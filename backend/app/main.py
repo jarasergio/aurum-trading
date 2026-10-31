@@ -4,6 +4,7 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from app.db.session import get_db
+from app.api.instruments import router as instruments_router
 
 
 app = FastAPI(
@@ -14,6 +15,10 @@ app = FastAPI(
     ),
     version="0.1.0",
 )
+
+
+# Registro de rutas
+app.include_router(instruments_router)
 
 
 @app.get("/", tags=["General"])
