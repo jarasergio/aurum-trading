@@ -19,7 +19,7 @@ if config.config_file_name is not None:
 from app.core.config import settings
 from app.db.base import Base
 from app.db.session import engine
-from app.models.instrument import Instrument  # noqa: F401
+from app import models  # noqa: F401
 
 # Metadatos de los modelos SQLAlchemy
 target_metadata = Base.metadata

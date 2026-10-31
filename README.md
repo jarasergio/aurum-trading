@@ -14,15 +14,13 @@
 
 <h2>1. OBJETIVOS DEL PROYECTO</h2>
 
-<p>Aurum Trading es un proyecto de desarrollo de una plataforma propia de análisis de mercados financieros y trading algorítmico, construida con Python, FastAPI y PostgreSQL.</p>
+<p>Aurum Trading es una plataforma propia en desarrollo para el análisis de mercados financieros, procesamiento de datos cuantitativos y trading algorítmico, construida con Python, FastAPI y PostgreSQL.</p>
 
 <p>El objetivo es desarrollar una arquitectura modular, escalable y multi-instrumento que permita gestionar datos de mercado, desarrollar estrategias cuantitativas, realizar backtesting, administrar riesgos y, en una etapa futura, integrar diferentes brokers.</p>
 
 <p>El proyecto contempla una interfaz web profesional para visualizar y controlar el sistema desde un único lugar.</p>
 
 <h3>Instrumentos financieros</h3>
-
-<p>La arquitectura está diseñada para trabajar con diferentes mercados:</p>
 
 <ul>
 <li><strong>XAU/USD:</strong> oro.</li>
@@ -40,8 +38,9 @@
 <ul>
 <li>Gestión de instrumentos financieros.</li>
 <li>Obtención de datos de mercado.</li>
-<li>Cotizaciones y precios en tiempo real.</li>
-<li>Almacenamiento de datos históricos.</li>
+<li>Gestión de cotizaciones.</li>
+<li>Almacenamiento de ticks.</li>
+<li>Almacenamiento histórico OHLCV.</li>
 <li>Gestión de temporalidades.</li>
 <li>Validación y normalización de datos.</li>
 <li>Indicadores técnicos.</li>
@@ -60,7 +59,7 @@
 
 <h2>2. ESTADO ACTUAL DEL DESARROLLO</h2>
 
-<p>El proyecto se encuentra en la fase inicial de construcción del backend.</p>
+<p>El proyecto se encuentra en la fase de construcción y validación del backend. Ya dispone de infraestructura, persistencia PostgreSQL, gestión de instrumentos, modelos de datos de mercado y pruebas automatizadas iniciales.</p>
 
 <table>
 <thead>
@@ -74,16 +73,25 @@
 <tr><td>Repositorio Git y GitHub</td><td>Completado</td></tr>
 <tr><td>Entorno Python</td><td>Completado</td></tr>
 <tr><td>PostgreSQL</td><td>Completado</td></tr>
+<tr><td>Base de datos de pruebas</td><td>Preparada</td></tr>
 <tr><td>SQLAlchemy</td><td>Completado</td></tr>
 <tr><td>Configuración de FastAPI</td><td>Completado</td></tr>
 <tr><td>Pydantic Settings</td><td>Completado</td></tr>
 <tr><td>Alembic y migraciones</td><td>Completado</td></tr>
 <tr><td>Modelo de instrumentos</td><td>Completado</td></tr>
 <tr><td>API REST CRUD de instrumentos</td><td>Completado y verificado</td></tr>
-<tr><td>Arquitectura Market Data</td><td>Pendiente</td></tr>
-<tr><td>Cotizaciones de mercado</td><td>Pendiente</td></tr>
-<tr><td>Datos históricos OHLCV</td><td>Pendiente</td></tr>
-<tr><td>Validación de datos financieros</td><td>Pendiente</td></tr>
+<tr><td>Modelos Market Quote</td><td>Implementado</td></tr>
+<tr><td>Modelos Market Tick</td><td>Implementado</td></tr>
+<tr><td>Modelos Market Candle</td><td>Implementado</td></tr>
+<tr><td>Migración de tablas Market Data</td><td>Aplicada y verificada</td></tr>
+<tr><td>Esquemas Pydantic de Market Data</td><td>Implementados</td></tr>
+<tr><td>Servicio de persistencia de cotizaciones</td><td>Implementado</td></tr>
+<tr><td>Consulta de últimas cotizaciones</td><td>Implementada</td></tr>
+<tr><td>Consulta de ticks históricos</td><td>Implementada</td></tr>
+<tr><td>Eliminación de ticks antiguos</td><td>Implementada</td></tr>
+<tr><td>Pruebas automatizadas Market Data</td><td>4 pruebas superadas</td></tr>
+<tr><td>API REST de Market Data</td><td>Pendiente</td></tr>
+<tr><td>Integración con proveedores externos</td><td>Pendiente</td></tr>
 <tr><td>Indicadores técnicos</td><td>Pendiente</td></tr>
 <tr><td>Estrategias algorítmicas</td><td>Pendiente</td></tr>
 <tr><td>Backtesting</td><td>Pendiente</td></tr>
@@ -107,11 +115,11 @@
 <tr><th>Tecnología</th><th>Función</th></tr>
 </thead>
 <tbody>
-<tr><td>Python 3.14</td><td>Lenguaje principal</td></tr>
+<tr><td>Python 3.14.4</td><td>Lenguaje principal</td></tr>
 <tr><td>FastAPI</td><td>Framework de API REST</td></tr>
 <tr><td>Uvicorn</td><td>Servidor ASGI</td></tr>
 <tr><td>SQLAlchemy</td><td>ORM y acceso a datos</td></tr>
-<tr><td>Psycopg</td><td>Conexión con PostgreSQL</td></tr>
+<tr><td>Psycopg 3</td><td>Conexión con PostgreSQL</td></tr>
 <tr><td>Alembic</td><td>Migraciones de base de datos</td></tr>
 <tr><td>Pydantic 2</td><td>Validación de datos</td></tr>
 <tr><td>Pydantic Settings</td><td>Configuración de la aplicación</td></tr>
@@ -127,8 +135,8 @@
 <tbody>
 <tr><td>Pandas</td><td>Procesamiento de datos</td></tr>
 <tr><td>NumPy</td><td>Cálculo numérico</td></tr>
-<tr><td>pandas-ta u otra biblioteca compatible</td><td>Indicadores técnicos</td></tr>
-<tr><td>backtesting.py (previsto)</td><td>Backtesting</td></tr>
+<tr><td>pandas-ta u otra biblioteca compatible</td><td>Indicadores técnicos previstos</td></tr>
+<tr><td>backtesting.py</td><td>Backtesting previsto</td></tr>
 </tbody>
 </table>
 
@@ -136,6 +144,9 @@
 
 <ul>
 <li>PostgreSQL 18.6.</li>
+<li>SQLAlchemy ORM.</li>
+<li>Alembic.</li>
+<li>Base de datos independiente para pruebas automatizadas.</li>
 </ul>
 
 <h3>Frontend previsto</h3>
@@ -155,10 +166,10 @@
 <li>GitHub.</li>
 <li>Visual Studio Code.</li>
 <li>NVM.</li>
-<li>Node.js 26.</li>
-<li>npm.</li>
-<li>Pytest.</li>
-<li>HTTPX.</li>
+<li>Node.js 26.13.0.</li>
+<li>npm 11.20.0.</li>
+<li>Pytest 9.2.0.</li>
+<li>HTTPX 0.28.1.</li>
 <li>Ruff.</li>
 </ul>
 
@@ -188,15 +199,15 @@
 
 <h3>Ubicación del proyecto</h3>
 
-<pre>
-/home/sergio/AURUM-DEV/Projects/aurum-trading/
-</pre>
+<pre>/home/sergio/AURUM-DEV/Projects/aurum-trading/</pre>
 
 <h3>Repositorio GitHub</h3>
 
 <p><a href="https://github.com/jarasergio/aurum-trading">https://github.com/jarasergio/aurum-trading</a></p>
 
-<p><strong>Rama principal:</strong> <code>main</code>.</p>
+<p><strong>Rama principal:</strong> main.</p>
+
+<p><strong>Rama de desarrollo actual:</strong> feature/market-data.</p>
 
 <hr>
 
@@ -204,7 +215,7 @@
 
 <p>La arquitectura del backend está organizada por responsabilidades, separando API, configuración, acceso a datos, modelos, esquemas y servicios.</p>
 
-<h3>Estructura actual y prevista</h3>
+<h3>Estructura actual</h3>
 
 <pre>
 aurum-trading/
@@ -213,56 +224,66 @@ aurum-trading/
 ├── .env.example
 ├── .gitignore
 ├── alembic.ini
+├── pytest.ini
+├── README.md
 │
 ├── backend/
-│   │
-│   ├── alembic/
-│   │   ├── versions/
-│   │   │   └── 3e9d19027571_create_instruments_table.py
-│   │   ├── env.py
-│   │   ├── README
-│   │   └── script.py.mako
-│   │
-│   ├── app/
-│   │   ├── __init__.py
-│   │   ├── main.py
-│   │   │
-│   │   ├── api/
-│   │   │   ├── __init__.py
-│   │   │   └── instruments.py
-│   │   │
-│   │   ├── core/
-│   │   │   ├── __init__.py
-│   │   │   └── config.py
-│   │   │
-│   │   ├── db/
-│   │   │   ├── __init__.py
-│   │   │   ├── base.py
-│   │   │   └── session.py
-│   │   │
-│   │   ├── models/
-│   │   │   ├── __init__.py
-│   │   │   └── instrument.py
-│   │   │
-│   │   ├── schemas/
-│   │   │   ├── __init__.py
-│   │   │   └── instrument.py
-│   │   │
-│   │   └── services/
-│   │       ├── __init__.py
-│   │       └── instrument_service.py
-│   │
-│   └── tests/
+│ │
+│ ├── alembic/
+│ │ ├── versions/
+│ │ │ ├── 3e9d19027571_create_instruments_table.py
+│ │ │ └── fde942f0c117_add_market_data_tables.py
+│ │ ├── env.py
+│ │ ├── README
+│ │ └── script.py.mako
+│ │
+│ ├── app/
+│ │ ├── __init__.py
+│ │ ├── main.py
+│ │ │
+│ │ ├── api/
+│ │ │ ├── __init__.py
+│ │ │ └── instruments.py
+│ │ │
+│ │ ├── core/
+│ │ │ └── config.py
+│ │ │
+│ │ ├── db/
+│ │ │ ├── base.py
+│ │ │ └── session.py
+│ │ │
+│ │ ├── models/
+│ │ │ ├── __init__.py
+│ │ │ ├── instrument.py
+│ │ │ ├── market_quote.py
+│ │ │ ├── market_tick.py
+│ │ │ └── market_candle.py
+│ │ │
+│ │ ├── schemas/
+│ │ │ ├── __init__.py
+│ │ │ ├── instrument.py
+│ │ │ └── market_data.py
+│ │ │
+│ │ ├── services/
+│ │ │ ├── __init__.py
+│ │ │ ├── instrument_service.py
+│ │ │ └── market_data_service.py
+│ │ │
+│ │ └── tests/
+│ │
+│ └── tests/
+│ ├── conftest.py
+│ └── test_market_data_service.py
 │
 ├── frontend/
 ├── docs/
 ├── research/
 ├── scripts/
 └── .github/
-    └── workflows/
+└── workflows/
 </pre>
 
-<p>La estructura mostrada recoge los componentes principales y las carpetas previstas para el crecimiento del proyecto. Los módulos todavía no implementados se incorporarán progresivamente.</p>
+<p>La estructura recoge los módulos implementados y las carpetas previstas para el crecimiento del proyecto. Las rutas y archivos de módulos futuros se incorporarán progresivamente.</p>
 
 <h3>Principios arquitectónicos</h3>
 
@@ -294,8 +315,9 @@ aurum-trading/
 <tbody>
 <tr><td>Motor</td><td>PostgreSQL</td></tr>
 <tr><td>Versión</td><td>18.6</td></tr>
-<tr><td>Base de datos</td><td><code>aurum_trading</code></td></tr>
-<tr><td>Usuario</td><td><code>aurum_app</code></td></tr>
+<tr><td>Base de datos principal</td><td>aurum_trading</td></tr>
+<tr><td>Base de datos de pruebas</td><td>aurum_trading_test</td></tr>
+<tr><td>Usuario</td><td>aurum_app</td></tr>
 <tr><td>ORM</td><td>SQLAlchemy</td></tr>
 <tr><td>Migraciones</td><td>Alembic</td></tr>
 </tbody>
@@ -303,11 +325,9 @@ aurum-trading/
 
 <p>La conexión se configura mediante variables de entorno y Pydantic Settings.</p>
 
-<p>Las credenciales deben permanecer en <code>.env</code> y nunca deben subirse al repositorio.</p>
+<p>Las credenciales deben permanecer en .env y nunca deben subirse al repositorio.</p>
 
 <h3>Modelo implementado: Instrument</h3>
-
-<p>La primera entidad del sistema es <strong>Instrument</strong>.</p>
 
 <p>Representa los instrumentos financieros que podrá gestionar Aurum Trading.</p>
 
@@ -328,38 +348,130 @@ aurum-trading/
 </tbody>
 </table>
 
-<p>El campo <code>symbol</code> tiene una restricción de unicidad.</p>
+<p>El campo symbol tiene una restricción de unicidad.</p>
 
 <p>La desactivación de instrumentos es lógica: los registros no se eliminan físicamente de la base de datos.</p>
 
-<h3>Instrumentos registrados actualmente</h3>
+<h3>Modelo implementado: MarketQuote</h3>
+
+<p>Almacena la última cotización disponible por instrumento y proveedor.</p>
 
 <table>
 <thead>
-<tr><th>ID</th><th>Símbolo</th><th>Nombre</th><th>Estado</th></tr>
+<tr><th>Campo</th><th>Tipo</th></tr>
 </thead>
 <tbody>
-<tr><td>1</td><td>EURUSD</td><td>Euro / US Dollar Spot</td><td>Activo</td></tr>
-<tr><td>3</td><td>GBPUSD</td><td>British Pound / US Dollar</td><td>Activo</td></tr>
+<tr><td>id</td><td>Integer</td></tr>
+<tr><td>instrument_id</td><td>ForeignKey</td></tr>
+<tr><td>provider</td><td>String(50)</td></tr>
+<tr><td>bid</td><td>Numeric(28,12), nullable</td></tr>
+<tr><td>ask</td><td>Numeric(28,12), nullable</td></tr>
+<tr><td>last</td><td>Numeric(28,12), nullable</td></tr>
+<tr><td>market_timestamp</td><td>DateTime(timezone=True)</td></tr>
+<tr><td>received_at</td><td>DateTime(timezone=True)</td></tr>
 </tbody>
 </table>
+
+<p>Existe una restricción de unicidad para instrument_id y provider, garantizando una cotización actual por proveedor e instrumento.</p>
+
+<p>También existe una restricción que impide almacenar cotizaciones sin ningún precio.</p>
+
+<h3>Modelo implementado: MarketTick</h3>
+
+<p>Almacena el histórico de actualizaciones de precios recibidas.</p>
+
+<table>
+<thead>
+<tr><th>Campo</th><th>Tipo</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>Integer</td></tr>
+<tr><td>instrument_id</td><td>ForeignKey</td></tr>
+<tr><td>provider</td><td>String(50)</td></tr>
+<tr><td>bid</td><td>Numeric(28,12), nullable</td></tr>
+<tr><td>ask</td><td>Numeric(28,12), nullable</td></tr>
+<tr><td>last</td><td>Numeric(28,12), nullable</td></tr>
+<tr><td>market_timestamp</td><td>DateTime(timezone=True)</td></tr>
+<tr><td>received_at</td><td>DateTime(timezone=True)</td></tr>
+</tbody>
+</table>
+
+<p>Se han incorporado índices para optimizar consultas por instrumento, fecha de mercado y fecha de recepción.</p>
+
+<p>La política inicial de retención del histórico es de siete días.</p>
+
+<h3>Modelo implementado: MarketCandle</h3>
+
+<p>Representa velas OHLCV de diferentes temporalidades.</p>
+
+<table>
+<thead>
+<tr><th>Campo</th><th>Tipo</th></tr>
+</thead>
+<tbody>
+<tr><td>id</td><td>Integer</td></tr>
+<tr><td>instrument_id</td><td>ForeignKey</td></tr>
+<tr><td>provider</td><td>String(50)</td></tr>
+<tr><td>timeframe</td><td>String(10)</td></tr>
+<tr><td>open_time</td><td>DateTime(timezone=True)</td></tr>
+<tr><td>close_time</td><td>DateTime(timezone=True)</td></tr>
+<tr><td>open</td><td>Numeric(28,12)</td></tr>
+<tr><td>high</td><td>Numeric(28,12)</td></tr>
+<tr><td>low</td><td>Numeric(28,12)</td></tr>
+<tr><td>close</td><td>Numeric(28,12)</td></tr>
+<tr><td>volume</td><td>Numeric(28,12), nullable</td></tr>
+</tbody>
+</table>
+
+<p>Se han incorporado restricciones de integridad para validar la relación entre los valores high, low, open y close.</p>
+
+<p>Existe una restricción de unicidad por instrumento, proveedor, temporalidad y hora de apertura.</p>
+
+<h3>Migraciones implementadas</h3>
+
+<table>
+<thead>
+<tr><th>Revisión</th><th>Descripción</th></tr>
+</thead>
+<tbody>
+<tr><td>3e9d19027571</td><td>Creación de la tabla instruments</td></tr>
+<tr><td>fde942f0c117</td><td>Creación de las tablas de Market Data</td></tr>
+</tbody>
+</table>
+
+<p>La última migración fue aplicada correctamente mediante Alembic.</p>
+
+<p>La verificación alembic check confirmó que no existen operaciones de migración adicionales pendientes.</p>
 
 <hr>
 
 <h2>7. API REST IMPLEMENTADA</h2>
 
-<p>Actualmente está implementada la gestión CRUD de instrumentos.</p>
+<h3>Gestión de instrumentos</h3>
 
 <table>
 <thead>
 <tr><th>Método</th><th>Endpoint</th><th>Descripción</th></tr>
 </thead>
 <tbody>
-<tr><td>GET</td><td><code>/instruments/</code></td><td>Listar instrumentos activos</td></tr>
-<tr><td>POST</td><td><code>/instruments/</code></td><td>Crear instrumento</td></tr>
-<tr><td>GET</td><td><code>/instruments/{instrument_id}</code></td><td>Consultar instrumento</td></tr>
-<tr><td>PATCH</td><td><code>/instruments/{instrument_id}</code></td><td>Modificar instrumento</td></tr>
-<tr><td>DELETE</td><td><code>/instruments/{instrument_id}</code></td><td>Desactivar instrumento</td></tr>
+<tr><td>GET</td><td>/instruments/</td><td>Listar instrumentos activos</td></tr>
+<tr><td>POST</td><td>/instruments/</td><td>Crear instrumento</td></tr>
+<tr><td>GET</td><td>/instruments/{instrument_id}</td><td>Consultar instrumento</td></tr>
+<tr><td>PATCH</td><td>/instruments/{instrument_id}</td><td>Modificar instrumento</td></tr>
+<tr><td>DELETE</td><td>/instruments/{instrument_id}</td><td>Desactivar instrumento</td></tr>
+</tbody>
+</table>
+
+<h3>Endpoints generales</h3>
+
+<table>
+<thead>
+<tr><th>Método</th><th>Endpoint</th><th>Descripción</th></tr>
+</thead>
+<tbody>
+<tr><td>GET</td><td>/</td><td>Información general de la aplicación</td></tr>
+<tr><td>GET</td><td>/health</td><td>Estado de la aplicación</td></tr>
+<tr><td>GET</td><td>/health/database</td><td>Comprobación de conexión a PostgreSQL</td></tr>
 </tbody>
 </table>
 
@@ -378,11 +490,94 @@ aurum-trading/
 
 <p>La API utiliza esquemas Pydantic para validar los datos recibidos.</p>
 
+<p><strong>Nota:</strong> Los modelos y servicios de Market Data están implementados, pero todavía no se han incorporado sus endpoints REST a FastAPI.</p>
+
 <hr>
 
-<h2>8. INSTALACIÓN Y EJECUCIÓN</h2>
+<h2>8. SERVICIO MARKET DATA</h2>
 
-<p>Los siguientes pasos corresponden al entorno de desarrollo preparado sobre Ubuntu.</p>
+<p>Se ha creado el servicio market_data_service.py para centralizar la persistencia y consulta de información de mercado.</p>
+
+<h3>Funcionalidades implementadas</h3>
+
+<ul>
+<li><strong>save_market_quote:</strong> comprueba la existencia del instrumento, guarda la cotización y registra un nuevo tick.</li>
+<li><strong>get_latest_quotes:</strong> obtiene las últimas cotizaciones de un instrumento, ordenadas por proveedor.</li>
+<li><strong>get_market_ticks:</strong> recupera los ticks históricos de un instrumento con límite configurable.</li>
+<li><strong>delete_expired_ticks:</strong> elimina los ticks cuya fecha de recepción supera el período de retención establecido.</li>
+</ul>
+
+<h3>Reglas de negocio implementadas</h3>
+
+<ul>
+<li>Una cotización debe contener al menos un precio entre bid, ask y last.</li>
+<li>Los precios deben ser positivos.</li>
+<li>Bid no puede ser superior a ask cuando ambos están presentes.</li>
+<li>La fecha de mercado debe incluir información de zona horaria.</li>
+<li>Una cotización antigua no debe reemplazar una cotización más reciente.</li>
+<li>Todos los ticks recibidos se registran en el histórico.</li>
+<li>Las operaciones de escritura utilizan transacciones y rollback ante errores.</li>
+<li>El límite de consulta de ticks está restringido entre 1 y 5000 registros.</li>
+<li>La retención inicial de ticks es de siete días.</li>
+</ul>
+
+<p>El servicio está preparado para evolucionar hacia una arquitectura de proveedores de datos independientes.</p>
+
+<hr>
+
+<h2>9. PRUEBAS AUTOMATIZADAS</h2>
+
+<p>Se ha configurado Pytest para ejecutar las pruebas automatizadas del backend.</p>
+
+<h3>Infraestructura de pruebas</h3>
+
+<ul>
+<li>Pytest 9.2.0.</li>
+<li>HTTPX 0.28.1.</li>
+<li>Base de datos PostgreSQL independiente: aurum_trading_test.</li>
+<li>Configuración de pruebas mediante pytest.ini.</li>
+<li>Fixtures compartidas mediante backend/tests/conftest.py.</li>
+</ul>
+
+<h3>Pruebas implementadas</h3>
+
+<table>
+<thead>
+<tr><th>Prueba</th><th>Resultado</th></tr>
+</thead>
+<tbody>
+<tr><td>test_save_market_quote</td><td>PASS</td></tr>
+<tr><td>test_newer_quote_updates_current_quote</td><td>PASS</td></tr>
+<tr><td>test_older_quote_does_not_replace_current_quote</td><td>PASS</td></tr>
+<tr><td>test_delete_expired_ticks</td><td>PASS</td></tr>
+</tbody>
+</table>
+
+<p><strong>Resultado de la última ejecución:</strong></p>
+
+<pre>
+4 passed, 1 warning
+</pre>
+
+<p>También se verificó la ejecución completa de la suite mediante:</p>
+
+<pre><code>pytest -v</code></pre>
+
+<p>Las cuatro pruebas fueron superadas correctamente.</p>
+
+<p>Se observó una advertencia de compatibilidad relacionada con HTTPX y Starlette TestClient. No impidió la ejecución de las pruebas.</p>
+
+<h3>Verificación de sintaxis</h3>
+
+<p>Se ejecutó correctamente la compilación de los módulos Python:</p>
+
+<pre><code>python -m compileall -q backend/app</code></pre>
+
+<p>También se comprobó la importación del servicio Market Data mediante un comando Python independiente.</p>
+
+<hr>
+
+<h2>10. INSTALACIÓN Y EJECUCIÓN</h2>
 
 <h3>Requisitos</h3>
 
@@ -406,8 +601,6 @@ cd aurum-trading</code></pre>
 
 <h3>Configurar las variables de entorno</h3>
 
-<p>El proyecto utiliza <code>.env.example</code> como plantilla de configuración.</p>
-
 <pre><code>cp .env.example .env</code></pre>
 
 <p>Completar los valores necesarios para la conexión a PostgreSQL y la configuración de la aplicación.</p>
@@ -416,15 +609,19 @@ cd aurum-trading</code></pre>
 
 <h3>Migraciones de base de datos</h3>
 
-<p>Desde la raíz del proyecto:</p>
-
 <pre><code>alembic upgrade head</code></pre>
 
-<p>Este comando aplica las migraciones pendientes.</p>
+<p>Comprobar la revisión actual:</p>
+
+<pre><code>alembic current</code></pre>
+
+<p>Comprobar diferencias entre modelos y base de datos:</p>
+
+<pre><code>alembic check</code></pre>
 
 <h3>Ejecutar el backend</h3>
 
-<p>Desde el directorio <code>backend</code>, con el entorno virtual activado:</p>
+<p>Desde el directorio backend, con el entorno virtual activado:</p>
 
 <pre><code>uvicorn app.main:app --reload</code></pre>
 
@@ -436,17 +633,25 @@ cd aurum-trading</code></pre>
 
 <pre>http://127.0.0.1:8000/docs</pre>
 
-<p><strong>Nota:</strong> la configuración de arranque, las variables de entorno y los comandos de ejecución deberán mantenerse sincronizados con los archivos reales del proyecto.</p>
+<h3>Ejecutar las pruebas</h3>
+
+<p>Desde la raíz del proyecto:</p>
+
+<pre><code>pytest -v</code></pre>
+
+<h3>Comprobar la sintaxis del backend</h3>
+
+<pre><code>python -m compileall -q backend/app</code></pre>
 
 <hr>
 
-<h2>9. SEGURIDAD Y GESTIÓN DEL RIESGO</h2>
+<h2>11. SEGURIDAD Y GESTIÓN DEL RIESGO</h2>
 
 <p>La seguridad es un principio fundamental del desarrollo de Aurum Trading.</p>
 
 <ul>
 <li>Las credenciales nunca se almacenan en GitHub.</li>
-<li>Los archivos <code>.env</code> permanecen excluidos del control de versiones.</li>
+<li>Los archivos .env permanecen excluidos del control de versiones.</li>
 <li>La ejecución real permanece deshabilitada inicialmente.</li>
 <li>El sistema debe distinguir claramente entre simulación y trading real.</li>
 <li>Las operaciones deberán respetar límites de riesgo configurables.</li>
@@ -456,7 +661,7 @@ cd aurum-trading</code></pre>
 <li>Las operaciones deberán poder reconciliarse con el estado del broker cuando exista integración.</li>
 </ul>
 
-<h3>Configuración inicial de trading</h3>
+<h3>Configuración inicial prevista</h3>
 
 <pre><code>TRADING_MODE=simulation
 TRADING_ENABLED=false</code></pre>
@@ -467,9 +672,7 @@ TRADING_ENABLED=false</code></pre>
 
 <hr>
 
-<h2>10. HOJA DE RUTA</h2>
-
-<p>El desarrollo se realizará progresivamente, validando cada módulo antes de continuar.</p>
+<h2>12. HOJA DE RUTA</h2>
 
 <h3>ETAPA 1 — Infraestructura</h3>
 
@@ -511,21 +714,38 @@ TRADING_ENABLED=false</code></pre>
 <li>Verificación de operaciones.</li>
 </ul>
 
-<h3>ETAPA 4 — Market Data</h3>
+<h3>ETAPA 4 — Arquitectura Market Data</h3>
 
-<p><strong>Estado: SIGUIENTE ETAPA</strong></p>
+<p><strong>Estado: IMPLEMENTADA PARCIALMENTE</strong></p>
 
 <ul>
-<li>Diseño de la arquitectura de proveedores.</li>
-<li>Integración de fuentes de datos.</li>
-<li>Cotizaciones de mercado.</li>
-<li>Datos históricos OHLCV.</li>
-<li>Gestión de temporalidades.</li>
-<li>Validación de precios.</li>
-<li>API de datos de mercado.</li>
+<li>Modelos MarketQuote, MarketTick y MarketCandle.</li>
+<li>Migraciones de base de datos.</li>
+<li>Esquemas Pydantic.</li>
+<li>Servicio de persistencia de cotizaciones.</li>
+<li>Consulta de cotizaciones actuales.</li>
+<li>Consulta de histórico de ticks.</li>
+<li>Retención de datos históricos.</li>
+<li>Validaciones de precios.</li>
+<li>Pruebas automatizadas iniciales.</li>
+<li>Endpoints REST de Market Data pendientes.</li>
+<li>Integración de proveedores externos pendiente.</li>
+<li>Generación y almacenamiento de velas pendiente.</li>
 </ul>
 
-<h3>ETAPA 5 — Análisis cuantitativo</h3>
+<h3>ETAPA 5 — Proveedores de datos</h3>
+
+<ul>
+<li>Diseño de arquitectura de proveedores.</li>
+<li>Evaluación de fuentes de datos.</li>
+<li>Integración de proveedores externos.</li>
+<li>Normalización de cotizaciones.</li>
+<li>Gestión de conexiones.</li>
+<li>Reconexión automática.</li>
+<li>Control de calidad de datos.</li>
+</ul>
+
+<h3>ETAPA 6 — Análisis cuantitativo</h3>
 
 <ul>
 <li>Indicadores técnicos.</li>
@@ -534,7 +754,7 @@ TRADING_ENABLED=false</code></pre>
 <li>Herramientas de análisis.</li>
 </ul>
 
-<h3>ETAPA 6 — Estrategias y backtesting</h3>
+<h3>ETAPA 7 — Estrategias y backtesting</h3>
 
 <ul>
 <li>Arquitectura de estrategias.</li>
@@ -545,7 +765,7 @@ TRADING_ENABLED=false</code></pre>
 <li>Métricas de rendimiento.</li>
 </ul>
 
-<h3>ETAPA 7 — Gestión del riesgo</h3>
+<h3>ETAPA 8 — Gestión del riesgo</h3>
 
 <ul>
 <li>Tamaño de posiciones.</li>
@@ -555,7 +775,7 @@ TRADING_ENABLED=false</code></pre>
 <li>Protección del capital.</li>
 </ul>
 
-<h3>ETAPA 8 — Dashboard web</h3>
+<h3>ETAPA 9 — Dashboard web</h3>
 
 <ul>
 <li>React y TypeScript.</li>
@@ -567,7 +787,7 @@ TRADING_ENABLED=false</code></pre>
 <li>Estado del motor de trading.</li>
 </ul>
 
-<h3>ETAPA 9 — Integración en tiempo real</h3>
+<h3>ETAPA 10 — Integración en tiempo real</h3>
 
 <ul>
 <li>WebSockets.</li>
@@ -576,7 +796,7 @@ TRADING_ENABLED=false</code></pre>
 <li>Monitorización del sistema.</li>
 </ul>
 
-<h3>ETAPA 10 — Integración con brokers</h3>
+<h3>ETAPA 11 — Integración con brokers</h3>
 
 <ul>
 <li>Evaluación de proveedores.</li>
@@ -589,7 +809,7 @@ TRADING_ENABLED=false</code></pre>
 
 <hr>
 
-<h2>11. CONTROL DE VERSIONES</h2>
+<h2>13. CONTROL DE VERSIONES</h2>
 
 <p>El proyecto utiliza Git y GitHub.</p>
 
@@ -597,9 +817,13 @@ TRADING_ENABLED=false</code></pre>
 
 <pre>git@github.com:jarasergio/aurum-trading.git</pre>
 
-<p><strong>Rama principal:</strong> <code>main</code>.</p>
+<p><strong>Rama principal:</strong> main.</p>
 
-<p>Se utilizarán commits pequeños y descriptivos.</p>
+<p>Se utilizarán ramas de desarrollo y commits pequeños y descriptivos.</p>
+
+<h3>Rama de trabajo actual</h3>
+
+<pre>feature/market-data</pre>
 
 <h3>Ejemplos de commits</h3>
 
@@ -612,28 +836,20 @@ docs: update project documentation</code></pre>
 
 <h3>Comandos habituales</h3>
 
-<p><strong>Comprobar el estado del repositorio:</strong></p>
+<pre><code>git status
 
-<pre><code>git status</code></pre>
+git add .
 
-<p><strong>Añadir cambios:</strong></p>
+git commit -m "descriptive commit message"
 
-<pre><code>git add .</code></pre>
-
-<p><strong>Crear un commit:</strong></p>
-
-<pre><code>git commit -m "descriptive commit message"</code></pre>
-
-<p><strong>Subir los cambios:</strong></p>
-
-<pre><code>git push origin main</code></pre>
+git push origin feature/market-data</code></pre>
 
 <h3>Archivos que no deben subirse</h3>
 
 <ul>
-<li><code>.env</code></li>
-<li><code>.venv/</code></li>
-<li><code>node_modules/</code></li>
+<li>.env</li>
+<li>.venv/</li>
+<li>node_modules/</li>
 <li>Archivos de caché.</li>
 <li>Logs.</li>
 <li>Bases de datos locales.</li>
@@ -644,7 +860,7 @@ docs: update project documentation</code></pre>
 
 <hr>
 
-<h2>12. DOCUMENTACIÓN DEL PROYECTO</h2>
+<h2>14. DOCUMENTACIÓN DEL PROYECTO</h2>
 
 <p>La documentación deberá evolucionar junto con el código.</p>
 
@@ -674,7 +890,7 @@ docs/
 
 <hr>
 
-<h2>13. ESTADO DE SEGURIDAD DEL PROYECTO</h2>
+<h2>15. ESTADO DE SEGURIDAD DEL PROYECTO</h2>
 
 <p>Aurum Trading se encuentra actualmente en fase de desarrollo.</p>
 
@@ -686,27 +902,31 @@ docs/
 
 <hr>
 
-<h2>14. PRÓXIMO PASO DE DESARROLLO</h2>
+<h2>16. PRÓXIMO PASO DE DESARROLLO</h2>
 
-<p>El siguiente objetivo es implementar el módulo <strong>Market Data</strong>.</p>
+<p>El siguiente objetivo es completar la arquitectura Market Data y exponer sus funcionalidades mediante la API REST.</p>
 
-<p>Antes de escribir código se definirá:</p>
+<h3>Orden de trabajo propuesto</h3>
 
 <ol>
-<li>La arquitectura de proveedores de datos.</li>
-<li>La estructura de cotizaciones.</li>
-<li>El modelo de almacenamiento histórico OHLCV.</li>
-<li>La gestión de temporalidades.</li>
-<li>Las reglas de validación de precios.</li>
-<li>Los servicios de consulta.</li>
-<li>Los endpoints de la API.</li>
+<li>Revisar y consolidar las pruebas del servicio Market Data.</li>
+<li>Completar las pruebas de validación de esquemas Pydantic.</li>
+<li>Implementar los endpoints REST para cotizaciones.</li>
+<li>Implementar los endpoints REST para histórico de ticks.</li>
+<li>Implementar los endpoints REST para velas OHLCV.</li>
+<li>Incorporar las consultas de histórico de velas.</li>
+<li>Diseñar la interfaz de proveedores de datos.</li>
+<li>Integrar el primer proveedor externo.</li>
+<li>Implementar la normalización de datos.</li>
+<li>Desarrollar el procesamiento de ticks y generación de velas.</li>
+<li>Ampliar las pruebas automatizadas.</li>
 </ol>
 
 <p>El diseño deberá permitir incorporar diferentes proveedores de datos sin modificar la lógica central de Aurum Trading.</p>
 
 <hr>
 
-<h2>15. FILOSOFÍA DEL PROYECTO</h2>
+<h2>17. FILOSOFÍA DEL PROYECTO</h2>
 
 <p>Aurum Trading se desarrollará siguiendo estos principios:</p>
 
