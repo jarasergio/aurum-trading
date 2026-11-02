@@ -1,3 +1,4 @@
+from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.exc import IntegrityError
@@ -6,11 +7,10 @@ from sqlalchemy.orm import Session
 from app.db.session import get_db
 from app.schemas.instrument import (
     InstrumentCreate,
-    InstrumentUpdate,
     InstrumentResponse,
+    InstrumentUpdate,
 )
 from app.services import instrument_service
-
 
 router = APIRouter(
     prefix="/instruments",
@@ -22,7 +22,9 @@ router = APIRouter(
     "/",
     response_model=list[InstrumentResponse],
 )
-def list_instruments(db: Session = Depends(get_db)):
+def list_instruments(
+    db: Annotated[Session, Depends(get_db)],
+):
     return instrument_service.get_instruments(db)
 
 
@@ -32,7 +34,7 @@ def list_instruments(db: Session = Depends(get_db)):
 )
 def read_instrument(
     instrument_id: int,
-    db: Session = Depends(get_db),
+    db: Annotated[Session, Depends(get_db)],
 ):
     instrument = instrument_service.get_instrument(db, instrument_id)
 
@@ -52,16 +54,16 @@ def read_instrument(
 )
 def create_instrument(
     instrument_data: InstrumentCreate,
-    db: Session = Depends(get_db),
+    db: Annotated[Session, Depends(get_db)],
 ):
     try:
         return instrument_service.create_instrument(db, instrument_data)
-    except IntegrityError:
+    except IntegrityError as err:
         db.rollback()
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="Instrument symbol already exists",
-        )
+        ) from err
 
 
 @router.patch(
@@ -71,7 +73,7 @@ def create_instrument(
 def update_instrument(
     instrument_id: int,
     instrument_data: InstrumentUpdate,
-    db: Session = Depends(get_db),
+    db: Annotated[Session, Depends(get_db)],
 ):
     instrument = instrument_service.get_instrument(db, instrument_id)
 
@@ -94,7 +96,7 @@ def update_instrument(
 )
 def delete_instrument(
     instrument_id: int,
-    db: Session = Depends(get_db),
+    db: Annotated[Session, Depends(get_db)],
 ):
     instrument = instrument_service.get_instrument(db, instrument_id)
 

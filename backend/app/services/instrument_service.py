@@ -1,4 +1,3 @@
-
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -8,9 +7,7 @@ from app.schemas.instrument import InstrumentCreate, InstrumentUpdate
 
 def get_instruments(db: Session) -> list[Instrument]:
     statement = (
-        select(Instrument)
-        .where(Instrument.is_active.is_(True))
-        .order_by(Instrument.id)
+        select(Instrument).where(Instrument.is_active.is_(True)).order_by(Instrument.id)
     )
     return list(db.scalars(statement).all())
 

@@ -1,11 +1,12 @@
+from typing import Annotated
 
-from fastapi import FastAPI, Depends
+from fastapi import Depends, FastAPI
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
-from app.db.session import get_db
 from app.api.instruments import router as instruments_router
-
+from app.api.market_data import router as market_data_router
+from app.db.session import get_db
 
 app = FastAPI(
     title="Aurum Trading API",
@@ -19,6 +20,7 @@ app = FastAPI(
 
 # Registro de rutas
 app.include_router(instruments_router)
+app.include_router(market_data_router)
 
 
 @app.get("/", tags=["General"])
@@ -39,7 +41,9 @@ async def health():
 
 
 @app.get("/health/database", tags=["General"])
-def database_health(db: Session = Depends(get_db)):
+def database_health(
+    db: Annotated[Session, Depends(get_db)],
+):
     db.execute(text("SELECT 1"))
 
     return {

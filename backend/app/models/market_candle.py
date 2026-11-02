@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from decimal import Decimal
 
@@ -48,47 +47,29 @@ class MarketCandle(Base):
         ),
     )
 
-    id: Mapped[int] = mapped_column(
-        Integer, primary_key=True, autoincrement=True
-    )
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
     instrument_id: Mapped[int] = mapped_column(
         ForeignKey("instruments.id", ondelete="CASCADE"),
         nullable=False,
     )
 
-    provider: Mapped[str] = mapped_column(
-        String(50), nullable=False
-    )
+    provider: Mapped[str] = mapped_column(String(50), nullable=False)
 
-    timeframe: Mapped[str] = mapped_column(
-        String(10), nullable=False
-    )
+    timeframe: Mapped[str] = mapped_column(String(10), nullable=False)
 
-    open_time: Mapped[datetime] = mapped_column(
-        DateTime(timezone=True), nullable=False
-    )
+    open_time: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
 
     close_time: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False
     )
 
-    open: Mapped[Decimal] = mapped_column(
-        Numeric(28, 12), nullable=False
-    )
+    open: Mapped[Decimal] = mapped_column(Numeric(28, 12), nullable=False)
 
-    high: Mapped[Decimal] = mapped_column(
-        Numeric(28, 12), nullable=False
-    )
+    high: Mapped[Decimal] = mapped_column(Numeric(28, 12), nullable=False)
 
-    low: Mapped[Decimal] = mapped_column(
-        Numeric(28, 12), nullable=False
-    )
+    low: Mapped[Decimal] = mapped_column(Numeric(28, 12), nullable=False)
 
-    close: Mapped[Decimal] = mapped_column(
-        Numeric(28, 12), nullable=False
-    )
+    close: Mapped[Decimal] = mapped_column(Numeric(28, 12), nullable=False)
 
-    volume: Mapped[Decimal | None] = mapped_column(
-        Numeric(28, 12), nullable=True
-    )
+    volume: Mapped[Decimal | None] = mapped_column(Numeric(28, 12), nullable=True)

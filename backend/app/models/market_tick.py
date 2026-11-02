@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from decimal import Decimal
 
@@ -36,30 +35,20 @@ class MarketTick(Base):
         ),
     )
 
-    id: Mapped[int] = mapped_column(
-        Integer, primary_key=True, autoincrement=True
-    )
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
     instrument_id: Mapped[int] = mapped_column(
         ForeignKey("instruments.id", ondelete="CASCADE"),
         nullable=False,
     )
 
-    provider: Mapped[str] = mapped_column(
-        String(50), nullable=False
-    )
+    provider: Mapped[str] = mapped_column(String(50), nullable=False)
 
-    bid: Mapped[Decimal | None] = mapped_column(
-        Numeric(28, 12), nullable=True
-    )
+    bid: Mapped[Decimal | None] = mapped_column(Numeric(28, 12), nullable=True)
 
-    ask: Mapped[Decimal | None] = mapped_column(
-        Numeric(28, 12), nullable=True
-    )
+    ask: Mapped[Decimal | None] = mapped_column(Numeric(28, 12), nullable=True)
 
-    last: Mapped[Decimal | None] = mapped_column(
-        Numeric(28, 12), nullable=True
-    )
+    last: Mapped[Decimal | None] = mapped_column(Numeric(28, 12), nullable=True)
 
     market_timestamp: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False

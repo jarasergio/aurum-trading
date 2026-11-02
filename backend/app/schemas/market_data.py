@@ -1,4 +1,3 @@
-
 from datetime import datetime
 from decimal import Decimal
 
@@ -20,9 +19,8 @@ class MarketQuoteCreate(BaseModel):
         if self.bid is None and self.ask is None and self.last is None:
             raise ValueError("At least one price must be provided")
 
-        if self.bid is not None and self.ask is not None:
-            if self.bid > self.ask:
-                raise ValueError("Bid cannot be greater than ask")
+        if self.bid is not None and self.ask is not None and self.bid > self.ask:
+            raise ValueError("Bid cannot be greater than ask")
 
         if self.market_timestamp.utcoffset() is None:
             raise ValueError("market_timestamp must include timezone")

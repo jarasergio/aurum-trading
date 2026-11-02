@@ -1,16 +1,13 @@
-
 import pytest
-
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
 from app import models  # noqa: F401
+from app.core.config import settings
 from app.db.base import Base
 from app.db.session import get_db
-from app.core.config import settings
 from app.main import app
-
 
 TEST_DATABASE_NAME = "aurum_trading_test"
 
