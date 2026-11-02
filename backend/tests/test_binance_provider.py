@@ -2,16 +2,16 @@ import asyncio
 from datetime import UTC
 from decimal import Decimal
 
-import httpx
+import httpx2
 import pytest
 
 from app.providers.binance import BinanceProvider
 
 
 def make_client(handler):
-    transport = httpx.MockTransport(handler)
+    transport = httpx2.MockTransport(handler)
 
-    return httpx.AsyncClient(
+    return httpx2.AsyncClient(
         transport=transport,
         base_url="https://api.binance.com",
     )
@@ -20,7 +20,7 @@ def make_client(handler):
 def test_fetch_quote_returns_normalized_data():
     def handler(request):
         if request.url.path.endswith("bookTicker"):
-            return httpx.Response(
+            return httpx2.Response(
                 200,
                 json={
                     "symbol": "BTCUSDT",
@@ -29,7 +29,7 @@ def test_fetch_quote_returns_normalized_data():
                 },
             )
 
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "symbol": "BTCUSDT",
@@ -66,13 +66,13 @@ def test_fetch_quote_rejects_empty_symbol():
 
 def test_fetch_quote_propagates_http_errors():
     def handler(request):
-        return httpx.Response(500)
+        return httpx2.Response(500)
 
     async def run():
         async with make_client(handler) as client:
             provider = BinanceProvider(client)
 
-            with pytest.raises(httpx.HTTPStatusError):
+            with pytest.raises(httpx2.HTTPStatusError):
                 await provider.fetch_quote("BTCUSDT")
 
     asyncio.run(run())
@@ -80,7 +80,7 @@ def test_fetch_quote_propagates_http_errors():
 
 def test_fetch_quote_rejects_unexpected_symbol():
     def handler(request):
-        return httpx.Response(
+        return httpx2.Response(
             200,
             json={
                 "symbol": "ETHUSDT",

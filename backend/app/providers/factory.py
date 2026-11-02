@@ -1,3 +1,5 @@
+import httpx2
+
 from app.providers import (
     BinanceProvider,
     ProviderRegistry,
@@ -5,10 +7,12 @@ from app.providers import (
 )
 
 
-def create_provider_registry() -> ProviderRegistry:
+def create_provider_registry(
+    client: httpx2.AsyncClient,
+) -> ProviderRegistry:
     registry = ProviderRegistry()
 
-    registry.register(BinanceProvider())
-    registry.register(YahooProvider())
+    registry.register(BinanceProvider(client))
+    registry.register(YahooProvider(client))
 
     return registry

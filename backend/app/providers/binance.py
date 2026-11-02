@@ -1,7 +1,7 @@
 from datetime import UTC, datetime
 from decimal import Decimal, InvalidOperation
 
-import httpx
+import httpx2
 
 from app.providers.base import NormalizedQuote
 
@@ -19,16 +19,13 @@ class BinanceProvider:
 
     def __init__(
         self,
-        client: httpx.AsyncClient | None = None,
+        client: httpx2.AsyncClient | None = None,
         timeout: float = 10.0,
     ) -> None:
         self._client = client
         self._timeout = timeout
 
-    async def fetch_quote(
-        self,
-        symbol: str,
-    ) -> NormalizedQuote:
+    async def fetch_quote(self, symbol: str) -> NormalizedQuote:
         normalized_symbol = symbol.strip().upper()
 
         if not normalized_symbol:
@@ -40,8 +37,7 @@ class BinanceProvider:
                 normalized_symbol,
             )
 
-        async with httpx.AsyncClient(
-            base_url=self.BASE_URL,
+        async with httpx2.AsyncClient(
             timeout=self._timeout,
         ) as client:
             return await self._request_quote(
@@ -51,7 +47,7 @@ class BinanceProvider:
 
     async def _request_quote(
         self,
-        client: httpx.AsyncClient,
+        client: httpx2.AsyncClient,
         symbol: str,
     ) -> NormalizedQuote:
         book_response = await client.get(
@@ -74,7 +70,7 @@ class BinanceProvider:
                 raise TypeError("Invalid Binance book response")
 
             if not isinstance(price_data, dict):
-                raise TypeError("Invalid Binance book response")
+                raise TypeError("Invalid Binance price response")
 
             if book_data.get("symbol") != symbol or price_data.get("symbol") != symbol:
                 raise ValueError("Binance returned an unexpected symbol")

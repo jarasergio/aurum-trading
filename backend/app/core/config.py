@@ -19,6 +19,9 @@ class Settings(BaseSettings):
     MARKET_DATA_PROVIDER: str = ""
     MARKET_DATA_API_KEY: str = ""
 
+    MARKET_DATA_POLL_INTERVAL: int = 10
+    MARKET_DATA_WORKER_ENABLED: bool = True
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8",
